@@ -1,12 +1,14 @@
 import Header from "./components/Header";
 import TaskList from "./components/TaskList";
+import AddTaskButton from "./components/AddTaskButton";
 
 function App() {
   return (
     <>
       <Header />
-      <main className="flex justify-center">
+      <main>
         <TaskList />
+        <AddTaskButton />
       </main>
     </>
   );
