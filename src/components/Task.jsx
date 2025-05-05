@@ -1,11 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Task({ children, index }) {
   const [isChecked, setIsChecked] = useState(false);
+  const [taskText, setTaskText] = useState(null);
+  const [inputText, setInputText] = useState(taskText);
 
   function handleChange() {
     setIsChecked((prev) => !prev);
-    console.log(isChecked);
+  }
+
+  useEffect(() => {
+    setTaskText(children ?? "");
+  }, [children]);
+
+  function handleInput(e) {
+    setInputText(e.target.value);
+  }
+
+  function handleOnBlur() {
+    setTaskText(inputText);
+  }
+
+  function handleKeyDown(e) {
+    if (e.key === "Enter" || e.key === "Escape") {
+      e.target.blur();
+    }
   }
 
   return (
@@ -25,7 +44,19 @@ export default function Task({ children, index }) {
             isChecked ? "line-through text-gray-500" : ""
           }`}
         >
-          {children}
+          {taskText != "" ? (
+            taskText
+          ) : (
+            <input
+              autoFocus
+              value={inputText}
+              onChange={handleInput}
+              onBlur={handleOnBlur}
+              onKeyDown={handleKeyDown}
+              placeholder="Please insert a task"
+              className="border-none bg-transparent focus:outline-none caret-violet-400"
+            />
+          )}
         </span>
       </label>
     </li>

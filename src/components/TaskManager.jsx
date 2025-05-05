@@ -12,7 +12,7 @@ export default function TaskManager() {
   const [taskList, setTaskList] = useState([...dummyTask]);
 
   function handleClick() {
-    setTaskList((prevList) => ["This is a new task", ...prevList]);
+    setTaskList((prevList) => ["", ...prevList]);
   }
 
   return (
