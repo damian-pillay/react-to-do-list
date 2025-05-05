@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Task from "./Task";
 
 const dummyTask = [
   "Create Dark mode feature",
@@ -13,12 +14,7 @@ export default function TaskList() {
     <div>
       <ul>
         {taskList.map((task, index) => (
-          <li key={index} className="mb-2">
-            <label>
-              <input type="checkbox" />
-              <span className="select-none">{task}</span>
-            </label>
-          </li>
+          <Task index={index}>{task}</Task>
         ))}
       </ul>
     </div>
