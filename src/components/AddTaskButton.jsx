@@ -1,13 +1,51 @@
-import ButtonIcon from "../assets/addButton.svg";
+import { useState } from "react";
+import DefaultButton from "../assets/addButton.svg";
+import HoveredButton from "../assets/addButtonHover.svg";
+import ClickedButton from "../assets/addButtonClicked.svg";
 
 export default function AddTaskButton() {
+  const [isHovering, setIsHovering] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
+
+  function handleMouseEnter() {
+    setIsHovering(true);
+  }
+
+  function handleMouseLeave() {
+    setIsHovering(false);
+  }
+
+  function handleMouseDown() {
+    setIsClicked(true);
+  }
+
+  function handleMouseUp() {
+    setIsClicked(false);
+  }
+
+  let buttonIcon = DefaultButton;
+
+  if (isHovering) {
+    buttonIcon = HoveredButton;
+  }
+
+  if (isClicked) {
+    buttonIcon = ClickedButton;
+  }
+
   return (
     <>
-      <button className>
+      <button
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        onMouseDown={handleMouseDown}
+        onMouseUp={handleMouseUp}
+        className="cursor-pointer"
+      >
         <img
-          src={ButtonIcon}
+          src={buttonIcon}
           alt="Add Task"
-          className="fixed bottom-10 right-10 h-20 w-20"
+          className="fixed bottom-10 right-10 h-23 w-23"
         ></img>
       </button>
     </>
