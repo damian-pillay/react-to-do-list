@@ -11,7 +11,7 @@ export default function TaskList() {
   const [taskList, setTaskList] = useState([...dummyTask]);
 
   return (
-    <div>
+    <div className="flex justify-center">
       <ul>
         {taskList.map((task, index) => (
           <Task index={index}>{task}</Task>
