@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const dummyTask = [
   "Create Dark mode feature",
-  "create add task feature",
+  "Create add task feature",
   "Create search feature",
 ];
 
@@ -11,7 +11,16 @@ export default function TaskList() {
 
   return (
     <div>
-      <ul></ul>
+      <ul>
+        {taskList.map((task, index) => (
+          <li key={index} className="mb-2">
+            <label>
+              <input type="checkbox" />
+              <span className="select-none">{task}</span>
+            </label>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
