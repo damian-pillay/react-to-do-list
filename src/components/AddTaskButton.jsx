@@ -3,7 +3,7 @@ import DefaultButton from "../assets/addButton.svg";
 import HoveredButton from "../assets/addButtonHover.svg";
 import ClickedButton from "../assets/addButtonClicked.svg";
 
-export default function AddTaskButton() {
+export default function AddTaskButton({ onClick }) {
   const [isHovering, setIsHovering] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
 
@@ -40,6 +40,7 @@ export default function AddTaskButton() {
         onMouseLeave={handleMouseLeave}
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
+        onClick={onClick}
         className="cursor-pointer"
       >
         <img
