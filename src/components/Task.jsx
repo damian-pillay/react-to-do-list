@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 
-export default function Task({ children, index }) {
+export default function Task({ children, index, handleInputConfirmation }) {
   const [isChecked, setIsChecked] = useState(false);
   const [taskText, setTaskText] = useState(null);
-  const [inputText, setInputText] = useState(taskText);
 
   function handleChange() {
     setIsChecked((prev) => !prev);
@@ -13,12 +12,8 @@ export default function Task({ children, index }) {
     setTaskText(children ?? "");
   }, [children]);
 
-  function handleInput(e) {
-    setInputText(e.target.value);
-  }
-
-  function handleOnBlur() {
-    setTaskText(inputText);
+  function handleOnBlur(e) {
+    handleInputConfirmation(index, e.target.value);
   }
 
   function handleKeyDown(e) {
@@ -49,8 +44,6 @@ export default function Task({ children, index }) {
           ) : (
             <input
               autoFocus
-              value={inputText}
-              onChange={handleInput}
               onBlur={handleOnBlur}
               onKeyDown={handleKeyDown}
               placeholder="Please insert a task"

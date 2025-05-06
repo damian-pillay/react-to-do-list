@@ -1,5 +1,5 @@
-import TaskList from "./TaskList";
 import AddTaskButton from "./AddTaskButton";
+import Task from "./Task";
 import { useState } from "react";
 
 const dummyTask = [
@@ -13,11 +13,30 @@ export default function TaskManager() {
 
   function handleClick() {
     setTaskList((prevList) => ["", ...prevList]);
+    console.log(taskList);
+  }
+
+  function handleChange(index, newTask) {
+    setTaskList((prevList) =>
+      prevList.map((task, i) => (i === index ? newTask : task))
+    );
   }
 
   return (
     <>
-      <TaskList taskList={taskList} />
+      <div className="flex justify-center">
+        <ul>
+          {taskList.map((task, index) => (
+            <Task
+              index={index}
+              taskList={taskList}
+              handleInputConfirmation={handleChange}
+            >
+              {task}
+            </Task>
+          ))}
+        </ul>
+      </div>
       <AddTaskButton onClick={handleClick} />
     </>
   );
