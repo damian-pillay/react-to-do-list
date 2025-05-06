@@ -13,7 +13,7 @@ export default function TaskManager() {
 
   function handleAdditon() {
     const newTask = {
-      id: taskList[0]?.id + 1,
+      id: Date.now(),
       text: "",
       isChecked: false,
     };
