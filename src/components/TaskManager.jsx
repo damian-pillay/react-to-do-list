@@ -11,7 +11,7 @@ const dummyTask = [
 export default function TaskManager() {
   const [taskList, setTaskList] = useState([...dummyTask]);
 
-  function handleClick() {
+  function handleAdditon() {
     const newTask = {
       id: taskList[0]?.id + 1,
       text: "",
@@ -26,6 +26,10 @@ export default function TaskManager() {
         task.id === id ? { ...task, text: newTaskText } : task
       )
     );
+  }
+
+  function handleDeletion(id) {
+    setTaskList((prevList) => prevList.filter((task) => task.id !== id));
   }
 
   function handleCheckState(id) {
@@ -48,13 +52,14 @@ export default function TaskManager() {
               checkState={task.isChecked}
               handleInputConfirmation={handleChange}
               handleCheckState={handleCheckState}
+              handleDeletion={handleDeletion}
             >
               {task.text}
             </Task>
           ))}
         </ul>
       </div>
-      <AddTaskButton left={false} onClick={handleClick} />
+      <AddTaskButton left={false} onClick={handleAdditon} />
     </>
   );
 }
