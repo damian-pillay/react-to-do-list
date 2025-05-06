@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAnimation, motion } from "framer-motion";
 import TrashCanIcon from "../assets/trashcan.svg";
+import ActionButton from "./ActionButton";
 
 export default function Task({
   children,
@@ -11,7 +12,6 @@ export default function Task({
   handleDeletion,
 }) {
   const [taskText, setTaskText] = useState(null);
-
   const controls = useAnimation();
 
   useEffect(() => {
@@ -82,13 +82,10 @@ export default function Task({
         </span>
       </label>
       <div className="flex">
-        {/* <button className="border w-20">edit</button> */}
-        <button
-          onClick={() => handleDeletion(id)}
-          className="flex items-center justify-center w-20 cursor-pointer"
-        >
-          <img src={TrashCanIcon} className="w-6 h-6" />
-        </button>
+        <ActionButton
+          icon={TrashCanIcon}
+          handleClick={() => handleDeletion(id)}
+        />
       </div>
     </motion.li>
   );
