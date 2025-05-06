@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useAnimation, motion } from "framer-motion";
 import DefaultButton from "../assets/addButton.svg";
 import HoveredButton from "../assets/addButtonHover.svg";
 import ClickedButton from "../assets/addButtonClicked.svg";
@@ -43,11 +44,13 @@ export default function AddTaskButton({ onClick }) {
         onClick={onClick}
         className="cursor-pointer"
       >
-        <img
+        <motion.img
           src={buttonIcon}
           alt="Add Task"
           className="fixed bottom-10 right-10 h-23 w-23"
-        ></img>
+          whileTap={{ scale: 0.9 }}
+          transition={{ type: "spring", stiffness: 300 }}
+        ></motion.img>
       </button>
     </>
   );
