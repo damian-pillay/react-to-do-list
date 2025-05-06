@@ -3,13 +3,16 @@ import { useAnimation, motion } from "framer-motion";
 
 export default function Task({ children, id, handleInputConfirmation }) {
   const [isChecked, setIsChecked] = useState(false);
+export default function Task({
+  children,
+  id,
+  handleInputConfirmation,
+  checkState,
+  handleCheckState,
+}) {
   const [taskText, setTaskText] = useState(null);
 
   const controls = useAnimation();
-
-  function handleChange() {
-    setIsChecked((prev) => !prev);
-  }
 
   useEffect(() => {
     setTaskText(children ?? "");
@@ -41,13 +44,12 @@ export default function Task({ children, id, handleInputConfirmation }) {
       <label className="flex p-[1.8em] gap-7 w-full rounded-2xl cursor-pointer text-sm sm:text-1xl lg:text-2xl">
         <input
           type="checkbox"
-          checked={isChecked}
-          onChange={handleChange}
+          checked={checkState}
+          onChange={handleCheck}
           className="appearance-none h-6 w-6 border-2 border-violet-400 rounded-lg checked:bg-violet-400 checked:border-transparent focus:outline-none"
         />
         <span
           className={`select-none ${
-            isChecked ? "line-through text-gray-500" : ""
           }`}
         >
           {taskText != "" ? (
