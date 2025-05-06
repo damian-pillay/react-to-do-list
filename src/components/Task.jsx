@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAnimation, motion } from "framer-motion";
+import TrashCanIcon from "../assets/trashcan.svg";
 
 export default function Task({
   children,
@@ -7,6 +8,7 @@ export default function Task({
   handleInputConfirmation,
   checkState,
   handleCheckState,
+  handleDeletion,
 }) {
   const [taskText, setTaskText] = useState(null);
 
@@ -52,7 +54,7 @@ export default function Task({
       animate={controls}
       exit={{ opacity: 0, y: 20 }}
       transition={{ duration: 0.3 }}
-      className="mb-5 ml-8 mr-8 lg:w-230 sm:w-150 rounded-2xl bg-neutral-900 hover:bg-neutral-800"
+      className="flex mb-5 ml-8 mr-8 lg:w-230 sm:w-150 rounded-2xl bg-neutral-900 hover:bg-neutral-800"
     >
       <label className="flex p-[1.8em] gap-7 w-full rounded-2xl cursor-pointer text-sm sm:text-1xl lg:text-2xl">
         <input
@@ -79,6 +81,15 @@ export default function Task({
           )}
         </span>
       </label>
+      <div className="flex">
+        {/* <button className="border w-20">edit</button> */}
+        <button
+          onClick={() => handleDeletion(id)}
+          className="flex items-center justify-center w-20 cursor-pointer"
+        >
+          <img src={TrashCanIcon} className="w-6 h-6" />
+        </button>
+      </div>
     </motion.li>
   );
 }
