@@ -1,19 +1,10 @@
-import { useState } from "react";
 import Task from "./Task";
 
-const dummyTask = [
-  "Create Dark mode feature",
-  "Create add task feature",
-  "Create search feature",
-];
-
-export default function TaskList() {
-  const [taskList, setTaskList] = useState([...dummyTask]);
-
+export default function TaskList({ taskList }) {
   return (
-    <div>
+    <div className="flex justify-center">
       <ul>
-        {taskList.map((task, index) => (
+        {[...taskList].reverse().map((task, index) => (
           <Task index={index}>{task}</Task>
         ))}
       </ul>
