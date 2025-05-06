@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
+import { useAnimation, motion } from "framer-motion";
 
-export default function Task({ children, index, handleInputConfirmation }) {
+export default function Task({ children, id, handleInputConfirmation }) {
   const [isChecked, setIsChecked] = useState(false);
   const [taskText, setTaskText] = useState(null);
+
+  const controls = useAnimation();
 
   function handleChange() {
     setIsChecked((prev) => !prev);
@@ -12,8 +15,12 @@ export default function Task({ children, index, handleInputConfirmation }) {
     setTaskText(children ?? "");
   }, [children]);
 
+  useEffect(() => {
+    controls.start({ opacity: 1, y: 0 });
+  });
+
   function handleOnBlur(e) {
-    handleInputConfirmation(index, e.target.value);
+    handleInputConfirmation(id, e.target.value);
   }
 
   function handleKeyDown(e) {
@@ -23,8 +30,12 @@ export default function Task({ children, index, handleInputConfirmation }) {
   }
 
   return (
-    <li
-      key={index}
+    <motion.li
+      key={id}
+      initial={{ opacity: 0, y: -20 }}
+      animate={controls}
+      exit={{ opacity: 0, y: 20 }}
+      transition={{ duration: 0.3 }}
       className="mb-5 ml-8 mr-8 lg:w-230 sm:w-150 rounded-2xl bg-neutral-900 hover:bg-neutral-800"
     >
       <label className="flex p-[1.8em] gap-7 w-full rounded-2xl cursor-pointer text-sm sm:text-1xl lg:text-2xl">
@@ -52,6 +63,6 @@ export default function Task({ children, index, handleInputConfirmation }) {
           )}
         </span>
       </label>
-    </li>
+    </motion.li>
   );
 }
