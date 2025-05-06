@@ -3,16 +3,20 @@ import Task from "./Task";
 import { useState } from "react";
 
 const dummyTask = [
-  { id: 1, text: "Create Dark mode feature" },
-  { id: 2, text: "Create add task feature" },
-  { id: 3, text: "Create search feature" },
+  { id: 3, text: "Create Dark mode feature", isChecked: false },
+  { id: 2, text: "Create add task feature", isChecked: false },
+  { id: 1, text: "Create search feature", isChecked: false },
 ];
 
 export default function TaskManager() {
   const [taskList, setTaskList] = useState([...dummyTask]);
 
   function handleClick() {
-    const newTask = { id: Date.now(), text: "" };
+    const newTask = {
+      id: taskList[0]?.id + 1,
+      text: "",
+      isChecked: false,
+    };
     setTaskList((prevList) => [newTask, ...prevList]);
   }
 
@@ -24,22 +28,33 @@ export default function TaskManager() {
     );
   }
 
+  function handleCheckState(id) {
+    setTaskList((prevList) =>
+      prevList.map((task) =>
+        task.id === id ? { ...task, isChecked: !task.isChecked } : task
+      )
+    );
+  }
+
   return (
     <>
       <div className="flex justify-center">
         <ul>
-          {taskList.map((task) => (
+          {taskList.map((task, index) => (
             <Task
+              key={index}
               id={task.id}
               taskList={taskList}
+              checkState={task.isChecked}
               handleInputConfirmation={handleChange}
+              handleCheckState={handleCheckState}
             >
               {task.text}
             </Task>
           ))}
         </ul>
       </div>
-      <AddTaskButton onClick={handleClick} />
+      <AddTaskButton left={false} onClick={handleClick} />
     </>
   );
 }
