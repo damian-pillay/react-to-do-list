@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAnimation, motion } from "framer-motion";
 
-export default function Task({ children, id, handleInputConfirmation }) {
-  const [isChecked, setIsChecked] = useState(false);
 export default function Task({
   children,
   id,
@@ -26,9 +24,24 @@ export default function Task({
     handleInputConfirmation(id, e.target.value);
   }
 
-  function handleKeyDown(e) {
+  async function handleKeyDown(e) {
     if (e.key === "Enter" || e.key === "Escape") {
+      await controls.start({
+        scale: [1, 1.05, 1],
+        transition: { duration: 0.3, ease: "easeInOut" },
+      });
+
       e.target.blur();
+    }
+  }
+
+  async function handleCheck() {
+    handleCheckState(id);
+    if (!checkState) {
+      await controls.start({
+        x: [-5, 5, -5, 5, 0],
+        transition: { duration: 0.4, ease: "easeInOut" },
+      });
     }
   }
 
@@ -50,6 +63,7 @@ export default function Task({
         />
         <span
           className={`select-none ${
+            checkState ? "line-through text-gray-500" : ""
           }`}
         >
           {taskText != "" ? (
