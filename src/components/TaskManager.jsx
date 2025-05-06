@@ -42,7 +42,7 @@ export default function TaskManager() {
 
   return (
     <>
-      <div className="flex justify-center">
+      <div className="flex justify-center select-none">
         <ul>
           {taskList.map((task, index) => (
             <Task
