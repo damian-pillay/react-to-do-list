@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useAnimation, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import DefaultButton from "../assets/addButton.svg";
 import HoveredButton from "../assets/addButtonHover.svg";
 import ClickedButton from "../assets/addButtonClicked.svg";
