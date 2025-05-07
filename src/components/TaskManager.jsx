@@ -1,6 +1,7 @@
 import AddTaskButton from "./AddTaskButton";
 import Task from "./Task";
 import { useState } from "react";
+import { Reorder } from "framer-motion";
 
 const dummyTask = [
   { id: 3, text: "Create Dark mode feature", isChecked: false },
@@ -44,19 +45,27 @@ export default function TaskManager() {
     <>
       <div className="flex justify-center select-none">
         <ul>
-          {taskList.map((task, index) => (
-            <Task
-              key={index}
-              id={task.id}
-              taskList={taskList}
-              checkState={task.isChecked}
-              handleInputConfirmation={handleChange}
-              handleCheckState={handleCheckState}
-              handleDeletion={handleDeletion}
-            >
-              {task.text}
-            </Task>
-          ))}
+          <Reorder.Group values={taskList} onReorder={setTaskList}>
+            {taskList.map((task, index) => (
+              <Reorder.Item
+                value={task}
+                key={task.id}
+                className="select-none list-none"
+              >
+                <Task
+                  key={index}
+                  id={task.id}
+                  tasklist={taskList}
+                  checkState={task.isChecked}
+                  handleInputConfirmation={handleChange}
+                  handleCheckState={handleCheckState}
+                  handleDeletion={handleDeletion}
+                >
+                  {task.text}
+                </Task>
+              </Reorder.Item>
+            ))}
+          </Reorder.Group>
         </ul>
       </div>
       <AddTaskButton left={false} onClick={handleAdditon} />
