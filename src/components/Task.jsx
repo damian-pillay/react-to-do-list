@@ -38,7 +38,7 @@ export default function Task({
         scale: [1, 1.05, 1],
         transition: { duration: 0.3, ease: "easeInOut" },
       });
-    }, 100);
+    }, 150);
   }
 
   function handleKeyDown(e) {
